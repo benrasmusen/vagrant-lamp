@@ -1,3 +1,5 @@
+# TODO: have the DBM2 and DBM2#mysql Pear packages installed by default
+
 require_recipe "apt"
 require_recipe "apache2"
 require_recipe "mysql::server"
@@ -17,11 +19,11 @@ bash "debconf_for_phpmyadmin" do
 end
 package "phpmyadmin"
 
-s = "dev-site"
+s = "dailypath.loc"
 site = {
   :name => s, 
-  :host => "www.#{s}.com", 
-  :aliases => ["#{s}.com", "dev.#{s}-static.com"]
+  :host => "#{s}", 
+  :aliases => ["#{s}"]
 }
 
 # Configure the development site
@@ -29,7 +31,7 @@ web_app site[:name] do
   template "sites.conf.erb"
   server_name site[:host]
   server_aliases site[:aliases]
-  docroot "/vagrant/public/"
+  docroot	"#{@node[:vagrant][:directory]}/www"
 end  
 
 # Add site info in /etc/hosts
