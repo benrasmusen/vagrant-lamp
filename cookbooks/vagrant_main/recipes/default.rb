@@ -58,3 +58,9 @@ execute "add-admin-user" do
   action :run
   ignore_failure true
 end
+
+execute "install-additional-pear-packages" do
+  command "sudo pear install MDB2 && sudo pear install MDB2_Driver_mysql"
+  action :run
+  ignore_failure true
+end
