@@ -19,7 +19,7 @@ bash "debconf_for_phpmyadmin" do
 end
 package "phpmyadmin"
 
-s = "dailypath.loc"
+s = "local.dailypath.com"
 site = {
   :name => s, 
   :host => "#{s}", 
@@ -61,6 +61,12 @@ end
 
 execute "install-additional-pear-packages" do
   command "sudo pear install MDB2 && sudo pear install MDB2_Driver_mysql"
+  action :run
+  ignore_failure true
+end
+
+execute "chmod-app-tmp-directories" do
+  command "chmod -R 777 #{@node[:vagrant][:directory]}/www/app/tmp"
   action :run
   ignore_failure true
 end
