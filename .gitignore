@@ -2,3 +2,4 @@
 www/*
 .DS_Store
 *.tmproj
+local_schema.sql
