@@ -18,4 +18,7 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port("http", 80, 8080)
   config.vm.forward_port("mysql", 3306, 3306)
+
+  config.vm.share_folder("vagrant", "/vagrant", ".", :owner => "www-data", :group => "www-data")
+
 end
