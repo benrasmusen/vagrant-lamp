@@ -1,5 +1,8 @@
 .vagrant
 www/*
+emails/*
+phpdoctor/*
+apidocs/*
 .DS_Store
 *.tmproj
 local_schema.sql

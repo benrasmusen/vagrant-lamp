@@ -1,5 +1,3 @@
-# TODO: have the DBM2 and DBM2#mysql Pear packages installed by default
-
 require_recipe "apt"
 require_recipe "apache2"
 require_recipe "mysql::server"
@@ -26,12 +24,18 @@ site = {
   :aliases => ["#{s}"]
 }
 
+execute "install-fakemail" do
+  command "sudo python #{@node[:vagrant][:directory]}/fakemail-python-1.0/setup.py install"
+  action :run
+  ignore_failure true
+end
+
 # Configure the development site
 web_app site[:name] do
   template "sites.conf.erb"
   server_name site[:host]
   server_aliases site[:aliases]
-  docroot	"#{@node[:vagrant][:directory]}/www"
+  docroot	"#{@node[:vagrant][:directory]}/www/dailypath.com"
 end  
 
 # Add site info in /etc/hosts
@@ -59,14 +63,14 @@ execute "add-admin-user" do
   ignore_failure true
 end
 
-execute "install-additional-pear-packages" do
-  command "sudo pear install MDB2 && sudo pear install MDB2_Driver_mysql"
+execute "chmod-app-tmp-directories" do
+  command "chmod -R 777 #{@node[:vagrant][:directory]}/www/dailypath.com/app/tmp"
   action :run
   ignore_failure true
 end
 
-execute "chmod-app-tmp-directories" do
-  command "chmod -R 777 #{@node[:vagrant][:directory]}/www/app/tmp"
+execute "start-fakemail" do
+  command "sudo python /usr/local/bin/fakemail.py --host=localhost --port=10025 --path=/vagrant/emails --background"
   action :run
   ignore_failure true
 end

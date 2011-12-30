@@ -1,0 +1,19 @@
+Metadata-Version: 1.0
+Name: fakemail-python
+Version: 1.0
+Summary: Fake SMTP server for use in software testing
+Home-page: http://fakemail.sourceforge.net/
+Author: Graham Ashton
+Author-email: graham@effectif.com
+License: UNKNOWN
+Download-URL: http://sourceforge.net/project/showfiles.php?group_id=130951&package_id=168675
+Description: fakemail is a fake mail server that captures
+              emails as files for acceptance testing. This avoids the excessive
+              configuration of setting up a real mail server and trying to
+              extract mail queue content.
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: Communications :: Email
+Classifier: Programming Language :: Python
+Classifier: Operating System :: OS Independent
